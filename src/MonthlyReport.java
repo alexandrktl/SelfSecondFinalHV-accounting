@@ -1,9 +1,11 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MonthlyReport {
+    public static HashMap showMonthStatistic;
     HashMap<String, MonthlyReportFiles> dataOfMonthlyStat=new HashMap<>();
     public MonthlyReport(String path) {
         String textOfMonthStat = readFileContentsOrNull(path);
@@ -35,6 +37,29 @@ public class MonthlyReport {
             System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно, файл не находится в нужной директории.");
             return null;
         }
+    }
+    public static void showMonthStatistic(HashMap hashMapOfThreeMonth) {
+       ArrayList<String> namesOfMonths =new ArrayList<>();
+       namesOfMonths.add( hashMapOfThreeMonth.keySet().toString()); // март,январь,февраль-добавил как 1 элемент списка, а надо 3 элемента по одной
+        String textOfMonthsNames="";
+        textOfMonthsNames=namesOfMonths.get(0);
+        String[]arrayOfTextOfMonthsNames=textOfMonthsNames.split(","); // сложно , но разделил названия месяцев -теперь они элементы массива
+
+        for (int i = 0; i < arrayOfTextOfMonthsNames.length; i++) {
+            String nameOfThisMonth = arrayOfTextOfMonthsNames[i];
+            System.out.println( "Месяц "+nameOfThisMonth +".");
+            Integer mostExpensiveForMonth=0;
+            Integer mostProfitForMonth=0;
+            for (int j = 0; j < hashMapOfThreeMonth.size(); j++) {
+                //как достать значения в ключах в глубоких мапах?????
+
+            }
+        }
+
+
+
+
+
     }
 
 }

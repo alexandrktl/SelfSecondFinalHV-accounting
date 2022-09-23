@@ -6,13 +6,23 @@ public class Main {
         printMenu();
         Scanner scanner = new Scanner(System.in);
         int command = scanner.nextInt();
+        HashMap <String, MonthlyReport> monthStatFolders=new HashMap<>();
         while (command != 0) {
+
             if (command==1){
-                HashMap <Integer, MonthlyReport> monthStatFolders=new HashMap<>();
+
                 for (int i = 1; i <4 ; i++) {
 
                     MonthlyReport mRep =new MonthlyReport("recourses/m.20210"+i+".csv") ;
-                    monthStatFolders.put(i,mRep); // теперь данные лежат в мапе из трех папок
+                    String keyOfFirstHashMap="";
+                    if (i==1){
+                        keyOfFirstHashMap="January";
+                    } else if (i == 2) {
+                        keyOfFirstHashMap="February";
+                    }else {
+                        keyOfFirstHashMap="March";
+                    }
+                    monthStatFolders.put(keyOfFirstHashMap,mRep); // теперь данные лежат в мапе из трех папок
                 }
 
             }else if (command==2){
@@ -20,6 +30,12 @@ public class Main {
             } else if (command==3){
 
             }else if (command==4){
+                // проверка на null или boolean
+                if(!monthStatFolders.containsKey("January")){
+                    System.out.println("Вывести информацию о всех месячных отчётах невозможно,\nсначала считайте данные из месячных отчетов.");
+                }else {
+                    MonthlyReport.showMonthStatistic(monthStatFolders);
+                }
 
             }else if (command==5){
 
