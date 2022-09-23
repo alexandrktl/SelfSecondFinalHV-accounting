@@ -4,22 +4,22 @@ import java.nio.file.Path;
 import java.util.HashMap;
 
 public class MonthlyReport {
-    HashMap<Integer, MonthlyReportFiles> dataOfMonthlyStat=new HashMap<>();
+    HashMap<String, MonthlyReportFiles> dataOfMonthlyStat=new HashMap<>();
     public MonthlyReport(String path) {
         String textOfMonthStat = readFileContentsOrNull(path);
         String[]linesOfText= textOfMonthStat.split("\n");
         for (int i = 1; i < linesOfText.length; i++) {
             String oneLine = linesOfText[i];
             String[]parttsOfOneLine=oneLine.split(",");
-            Integer nameOfMonth=i;
+            String itemName= parttsOfOneLine[0];
             int quantityOfStat= Integer.parseInt(parttsOfOneLine[2]);
             int sumOfOneOfStat= Integer.parseInt(parttsOfOneLine[3]);
             boolean isExpenseInStat= Boolean.parseBoolean(parttsOfOneLine[1]);
-            if (!dataOfMonthlyStat.containsKey(nameOfMonth)){
-                dataOfMonthlyStat.put(nameOfMonth, new MonthlyReportFiles(nameOfMonth) );
-            } MonthlyReportFiles mRepFile= dataOfMonthlyStat.get(nameOfMonth);  // это мы вызвали конктретно этот конструктор
+            if (!dataOfMonthlyStat.containsKey(itemName)){
+                dataOfMonthlyStat.put(itemName, new MonthlyReportFiles(itemName) );
+            } MonthlyReportFiles mRepFile= dataOfMonthlyStat.get(itemName);  // это мы вызвали конктретно этот конструктор
             if (isExpenseInStat){
-                mRepFile.totalExpenses+=quantityOfStat*sumOfOneOfStat;                         // тут я хочу в него положить значения
+                mRepFile.totalExpenses+=quantityOfStat*sumOfOneOfStat;      // тут я хочу в него положить значения
             }else {
                 mRepFile.totalProfit+=quantityOfStat*sumOfOneOfStat;
             }

@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -7,8 +8,11 @@ public class Main {
         int command = scanner.nextInt();
         while (command != 0) {
             if (command==1){
+                HashMap <Integer, MonthlyReport> monthStatFolders=new HashMap<>();
                 for (int i = 1; i <4 ; i++) {
-                    MonthlyReport mRep =new MonthlyReport("rescourses/m.20210"+i+".csv") ;
+
+                    MonthlyReport mRep =new MonthlyReport("recourses/m.20210"+i+".csv") ;
+                    monthStatFolders.put(i,mRep); // теперь данные лежат в мапе из трех папок
                 }
 
             }else if (command==2){
