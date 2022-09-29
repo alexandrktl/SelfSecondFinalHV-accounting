@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,27 +39,28 @@ public class MonthlyReport {
             return null;
         }
     }
-    public static void showMonthStatistic(HashMap hashMapOfThreeMonth) {
-       ArrayList<String> namesOfMonths =new ArrayList<>();
-       namesOfMonths.add( hashMapOfThreeMonth.keySet().toString()); // март,январь,февраль-добавил как 1 элемент списка, а надо 3 элемента по одной
-        String textOfMonthsNames="";
-        textOfMonthsNames=namesOfMonths.get(0);
-        String[]arrayOfTextOfMonthsNames=textOfMonthsNames.split(","); // сложно , но разделил названия месяцев -теперь они элементы массива
-
-        for (int i = 0; i < arrayOfTextOfMonthsNames.length; i++) {
-            String nameOfThisMonth = arrayOfTextOfMonthsNames[i];
-            System.out.println( "Месяц "+nameOfThisMonth +".");
-            Integer mostExpensiveForMonth=0;
-            Integer mostProfitForMonth=0;
-            for (int j = 0; j < hashMapOfThreeMonth.size(); j++) {
-                //как достать значения в ключах в глубоких мапах?????+
+    public static void showMonthStatistic(MonthlyReport monthlyReport, int i) {
+        int maxProfOfMonth=0;
+        int maxExpenseOfMonth=0;
+        String nameOfMostProf="";
+        String nameOfMostExp="";
+        System.out.println( "Месяц-"+ Month.of(i));
+        for(String name:monthlyReport.dataOfMonthlyStat.keySet()){
+            MonthlyReportFiles hmInside = monthlyReport.dataOfMonthlyStat.get(name);
+            if (hmInside.totalProfit>maxProfOfMonth){
+                maxProfOfMonth=hmInside.totalProfit;
+                nameOfMostProf=name;
+            }
+            else if (hmInside.totalExpenses>maxExpenseOfMonth){
+                maxExpenseOfMonth=hmInside.totalExpenses;
+                nameOfMostExp=name;
 
             }
-        }
 
 
 
-
+        }System.out.println( "Самый прибыльный товар - "+nameOfMostProf + ". выручено- " +maxProfOfMonth);
+        System.out.println("Самая большая трата - "+nameOfMostExp + ". потрачено- " +maxExpenseOfMonth);
 
     }
 

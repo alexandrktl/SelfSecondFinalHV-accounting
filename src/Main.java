@@ -2,39 +2,43 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         printMenu();
+        MonthlyReport[] mRep=new MonthlyReport[3];
+
         Scanner scanner = new Scanner(System.in);
         int command = scanner.nextInt();
-        HashMap <String, MonthlyReport> monthStatFolders=new HashMap<>();
+        //HashMap <String, MonthlyReport> monthStatFolders=new HashMap<>();
         while (command != 0) {
 
             if (command==1){
 
-                for (int i = 1; i <4 ; i++) {
+                if ( mRep[0]==null){
+                    for (int i = 0; i < mRep.length; i++) {
 
-                    MonthlyReport mRep =new MonthlyReport("recourses/m.20210"+i+".csv") ;
-                    String keyOfFirstHashMap="";
-                    if (i==1){
-                        keyOfFirstHashMap="January";
-                    } else if (i == 2) {
-                        keyOfFirstHashMap="February";
-                    }else {
-                        keyOfFirstHashMap="March";
+                        mRep[i] = new MonthlyReport("recourses/m.20210" + (i + 1) + ".csv");
                     }
-                    monthStatFolders.put(keyOfFirstHashMap,mRep); // теперь данные лежат в мапе из трех папок
-                }
 
+
+                }else {
+                    System.out.println("Файлы уже считаны!");
+
+
+                }
             }else if (command==2){
               YearlyReport yRep= new YearlyReport("recourses/y.2021.csv");
             } else if (command==3){
 
             }else if (command==4){
                 // проверка на null или boolean
-                if(!monthStatFolders.containsKey("January")){
+                if(mRep[0]==null){
                     System.out.println("Вывести информацию о всех месячных отчётах невозможно,\nсначала считайте данные из месячных отчетов.");
                 }else {
-                    MonthlyReport.showMonthStatistic(monthStatFolders);
+                    for (int i = 0; i < mRep.length; i++) {
+                        MonthlyReport.showMonthStatistic(mRep[i],(i+1));
+                    }
+
                 }
 
             }else if (command==5){
