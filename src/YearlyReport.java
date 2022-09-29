@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Month;
 import java.util.HashMap;
 
 public class YearlyReport {
@@ -26,7 +27,7 @@ String textOfYearStat = readFileContentsOrNull(path);
     System.out.println("Файл годового отчёта успешно прочитан и обработан. ");
     System.out.println();
 }
-    private String readFileContentsOrNull(String path)
+    private static String readFileContentsOrNull(String path)
     {
         try {
             return Files.readString(Path.of(path));
@@ -35,5 +36,29 @@ String textOfYearStat = readFileContentsOrNull(path);
             return null;
         }
     }
+public static void showStatOfYear(YearlyReport yearlyReport, String path){
+
+int difference=0;
+int ProfitOfYear=0;
+int ExpensesOfYear=0;
+    String[] partsOfPath=path.split("\\.");
+    int yearNumber=Integer.parseInt(partsOfPath[1]);
+
+    System.out.println("Рассматриваемый год:"+yearNumber );
+
+for (Integer name: yearlyReport.dataOfYearlyStat.keySet()){
+    YearlyReportFiles hmInside=yearlyReport.dataOfYearlyStat.get(name);
+
+    difference= hmInside.totalProfit-hmInside.totalExpenses; // прибыль
+    ProfitOfYear+= hmInside.totalProfit;
+    ExpensesOfYear+= hmInside.totalExpenses;
+
+    System.out.println("Месяц "+ Month.of(name));
+    System.out.println( "Прибыль = "+ difference);
+
+}
+    System.out.println("Средний расход за все месяцы в году "+(double)(ExpensesOfYear/yearlyReport.dataOfYearlyStat.size() ));
+    System.out.println("Средний доход за все месяцы в году "+(double)ProfitOfYear/yearlyReport.dataOfYearlyStat.size());
+}
 
 }

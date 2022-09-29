@@ -27,8 +27,9 @@ public class MonthlyReport {
                 mRepFile.totalProfit+=quantityOfStat*sumOfOneOfStat;
             }
         }
-        System.out.println("Файл месячного отчёта успешно прочитан и обработан. ");
-        System.out.println();
+
+        System.out.println("Файл"+"месячного отчёта успешно прочитан и обработан.\n ");
+
     }
     private String readFileContentsOrNull(String path)
     {

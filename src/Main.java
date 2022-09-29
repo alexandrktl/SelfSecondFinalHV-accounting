@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
         printMenu();
         MonthlyReport[] mRep=new MonthlyReport[3];
+        YearlyReport[] yRepMap=new YearlyReport[1];
 
         Scanner scanner = new Scanner(System.in);
         int command = scanner.nextInt();
@@ -27,11 +28,12 @@ public class Main {
 
                 }
             }else if (command==2){
-              YearlyReport yRep= new YearlyReport("recourses/y.2021.csv");
+              yRepMap[0]=new YearlyReport("recourses/y.2021.csv");
+
             } else if (command==3){
 
             }else if (command==4){
-                // проверка на null или boolean
+
                 if(mRep[0]==null){
                     System.out.println("Вывести информацию о всех месячных отчётах невозможно,\nсначала считайте данные из месячных отчетов.");
                 }else {
@@ -42,6 +44,12 @@ public class Main {
                 }
 
             }else if (command==5){
+                if (yRepMap[0]==null){
+                    System.out.println("Невозможно выполнить команду, сначала считайте годовой отчет.");
+                }else {
+                       YearlyReport.showStatOfYear(yRepMap[0], "recourses/y.2021.csv");
+                }
+
 
             }else {
                 System.out.println("Такой команды нет!");
