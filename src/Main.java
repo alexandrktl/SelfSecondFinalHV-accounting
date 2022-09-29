@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        printMenu();
+         printMenu();
         MonthlyReport[] mRep=new MonthlyReport[3];
         YearlyReport[] yRepMap=new YearlyReport[1];
 
@@ -31,11 +31,17 @@ public class Main {
               yRepMap[0]=new YearlyReport("recourses/y.2021.csv");
 
             } else if (command==3){
-
+                if (yRepMap[0]==null && yRepMap[0]==null){
+                    System.out.println("Невозможно провести сверку, не все файлы прочитаны!");
+                }else {
+                    for (int i = 0; i < mRep.length; i++) {
+                        MonthlyReport.compareMonthAndYear(mRep[i],yRepMap[0], i+1);
+                    }System.out.println("Отчеты успешно прошли проверку!");
+            }
             }else if (command==4){
 
                 if(mRep[0]==null){
-                    System.out.println("Вывести информацию о всех месячных отчётах невозможно,\nсначала считайте данные из месячных отчетов.");
+                    System.out.println("Вывести информацию о всех месячных отчётах невозможно,\nCначала считайте данные из месячных отчетов.");
                 }else {
                     for (int i = 0; i < mRep.length; i++) {
                         MonthlyReport.showMonthStatistic(mRep[i],(i+1));
@@ -61,13 +67,13 @@ public class Main {
         System.out.println("Программа завершена.");
     }
     private static void printMenu () {
-        System.out.println("Выберите действие: ");
+        System.out.println("\nВыберите действие: ");
         System.out.println("1   Считать все месячные отчёты");
         System.out.println("2   Считать годовой отчёт");
         System.out.println("3   Сверить отчёты ");
         System.out.println("4   Вывести информацию о всех месячных отчётах ");
         System.out.println("5   Вывести информацию о годовом отчёте ");
-        System.out.println("0   Выход из программы");
+        System.out.println("0   Выход из программы\n");
 
 
     }
