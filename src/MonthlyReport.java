@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MonthlyReport {
@@ -34,6 +33,16 @@ public class MonthlyReport {
         System.out.println("Файл" + "месячного отчёта успешно прочитан и обработан.\n ");
 
     }
+
+    public void fillmRep(){
+
+    }
+
+
+
+
+
+
 
     private String readFileContentsOrNull(String path) {
         try {
